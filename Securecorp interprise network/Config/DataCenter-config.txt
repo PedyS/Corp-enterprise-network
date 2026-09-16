@@ -1,0 +1,139 @@
+DCS#sh run
+Building configuration...
+
+Current configuration : 2337 bytes
+!
+version 15.0
+service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname DCS
+!
+enable secret 5 $1$mERr$8y99F3/EHNUg/H7E4nSp/0
+!
+!
+!
+ip ssh version 2
+ip domain-name securelab.local
+!
+username pedy secret 5 $1$mERr$KBxZPDnTW.MTsqlKHQ/ll.
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+interface FastEthernet0/1
+ switchport access vlan 40
+ switchport mode access
+!
+interface FastEthernet0/2
+ switchport access vlan 40
+ switchport mode access
+!
+interface FastEthernet0/3
+ switchport access vlan 40
+ switchport mode access
+!
+interface FastEthernet0/4
+ switchport access vlan 40
+ switchport mode access
+!
+interface FastEthernet0/5
+ switchport access vlan 100
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpdufilter enable
+!
+interface FastEthernet0/6
+!
+interface FastEthernet0/7
+!
+interface FastEthernet0/8
+!
+interface FastEthernet0/9
+!
+interface FastEthernet0/10
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+!
+interface FastEthernet0/23
+!
+interface FastEthernet0/24
+!
+interface GigabitEthernet0/1
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 40,99-100
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface GigabitEthernet0/2
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 40,99-100
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan40
+ no ip address
+!
+interface Vlan99
+ no ip address
+!
+interface Vlan100
+ ip address 100.1.1.4 255.255.255.240
+!
+ip default-gateway 100.1.1.2
+!
+banner motd ^CAuthorized users only. Enter credentials to proceed. Unauthorized access is prohibited. All activity is logged and monitored.^C
+logging 40.1.1.40
+!
+!
+!
+ip access-list standard Managemenet
+ permit 100.1.1.0 0.0.0.15
+ permit 100.2.1.0 0.0.0.7
+ permit 100.2.2.0 0.0.0.7
+line con 0
+ login local
+ exec-timeout 5 0
+!
+line vty 0 4
+ access-class Management in
+ exec-timeout 5 0
+ login local
+ transport input ssh
+line vty 5 15
+ login
+!
+!
+!
+ntp server 40.1.1.30
+!
+end
