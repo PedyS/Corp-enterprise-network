@@ -7,7 +7,7 @@ SecureCorp operates three connected sites: Headquarters (HQ) with an attached Da
 
 ## Topology
 
-![Network Topology](/screenshots/Topology.png)
+![Network Topology](Securecorp%20interprise%20network/screenshots/Topology.png).
 
 - **Core layer:** Core1 & Core2 (Catalyst 3560/3650), redundant via LACP EtherChannel + HSRP
 - **Access layer:** Catalyst 2960 switches, dual-homed to both Cores
